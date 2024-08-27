@@ -41,7 +41,6 @@ public class LoginTest {
         driver.get(url);
         login(driver, username, password);
 
-        // Custom assert for invalid login 1
         WebElement errorMessage = driver.findElement(By.xpath("//h3[@data-test='error']"));
         String actualErrorMessage = errorMessage.getText();
         String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
@@ -62,6 +61,36 @@ public class LoginTest {
         delay(3);
 
         // Scenario Test invalid Login Custom Assert 3
+        System.out.println("Test Username Isi & Password Kosong");
+        username = "standard_user";
+        password = "";
+
+        driver.get(url);
+        login(driver, username, password);
+
+        WebElement errorEmpty1 = driver.findElement(By.xpath("//h3[@data-test='error']"));
+        String actualErrorEmpty1 = errorEmpty1.getText();
+        String expectedErrorEmpty1 = "Epic sadface: Password is required";
+        customAssertEquals(actualErrorEmpty1, expectedErrorEmpty1);
+
+        delay(3);
+
+        // Scenario Test invalid Login Custom Assert 4
+        System.out.println("Test Username Kosong & Password Isi");
+        username = "";
+        password = "secret_sauce";
+
+        driver.get(url);
+        login(driver, username, password);
+
+        WebElement errorEmpty2 = driver.findElement(By.xpath("//h3[@data-test='error']"));
+        String actualErrorEmpty2 = errorEmpty2.getText();
+        String expectedErrorEmpty2 = "Epic sadface: Username is required";
+        customAssertEquals(actualErrorEmpty2, expectedErrorEmpty2);
+
+        delay(3);
+
+        // Scenario Test invalid Login Custom Assert 5
         System.out.println("Test Username & Password Kosong");
         username = "";
         password = "";
